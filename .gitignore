@@ -1,0 +1,7 @@
+# session working notes — never committed
+.agent/scratch/*
+!.agent/scratch/.gitkeep
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
