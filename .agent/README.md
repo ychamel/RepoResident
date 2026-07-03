@@ -43,8 +43,12 @@ handover is the STATE.md rewrite: what's active, exact next step, watch-outs.
   maintenance run fine on cheaper models — the design doc plus checklists carry the intent.
 - **Multi-session features:** the design's work plan is sliced to ≤1 session each; STATE points
   at the next slice, so any session can resume without replaying history.
-- **Parallel sessions:** the harness assumes one writer at a time. If you must parallelize,
-  split by area and let only one session own STATE.md.
+- **Team mode (parallel writers):** one branch per feature, claimed on `.agent/BOARD.md` before
+  work starts — an advisory lock at MAP-module granularity, so overlap surfaces at claim time,
+  not merge time. STATE.md is branch-local; journal/DECISIONS/BOARD merge by union
+  (`.gitattributes`; run `git config merge.ours.driver true` once per clone). The whole branch
+  lifecycle — claim, sync, merge, release — is `workflows/integrate.md`. Solo repos: ignore all
+  of it and work on main; the protocol only exists once the board has rows.
 - **Trust the budgets.** If a harness file feels bloated or stale, say "run maintenance".
 
 ## File map
@@ -56,7 +60,9 @@ handover is the STATE.md rewrite: what's active, exact next step, watch-outs.
 | `.agent/MAP.md` | one line per module — where things live | when locating code |
 | `.agent/PROJECT.md` | architecture, constraints, glossary, landmines | feature work / confusion |
 | `.agent/DECISIONS.md` | binding one-line decisions + archive | before designing |
-| `.agent/workflows/*.md` | procedures: feature, patch, debug, refactor, review, maintain, bootstrap | one per task |
+| `.agent/BOARD.md` | team mode: branch claims + integration log; lives on main | claim / integrate |
+| `.gitattributes` | merge rules keeping harness files conflict-free across branches | by git |
+| `.agent/workflows/*.md` | procedures: feature, patch, debug, refactor, review, integrate, maintain, bootstrap | one per task |
 | `.agent/designs/` | one doc per feature (TEMPLATE.md); archive/ for shipped | active design only |
 | `.agent/areas/` | deep docs for gnarly modules, created on demand | when working that area |
 | `.agent/journal/` | append-only session log, monthly files | write-only; grep to investigate |

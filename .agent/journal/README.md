@@ -2,6 +2,6 @@
 # Grep it — never load whole files into context. Monthly files (<YYYY-MM>.md), created on first write.
 # maintain.md rolls months older than 2 into ARCHIVE.md (one line per session, live flags kept).
 
-Entry format (≤4 lines per session):
+Entry format (≤4 lines per session; team repos tag the owner: S<n>/<owner> — see CLAUDE.md Team protocol):
 S<n> <YYYY-MM-DD> <workflow>: outcome + key files touched [refs: <design>/D<n>]
   flag: <debt, risk, or cleanup noticed but out of scope — optional; maintain.md triages these>

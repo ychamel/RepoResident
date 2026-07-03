@@ -32,6 +32,14 @@ END — mandatory whenever you changed anything:
 If the new Session number is a multiple of 10, add "maintenance due" to STATE `Next:`
 (run `.agent/workflows/maintain.md` now if the session has room).
 
+## Team protocol (shared repos only — solo repo means one writer: skip this section)
+- One branch per feature/task. Before its first line of code, claim your areas on
+  `.agent/BOARD.md` via `workflows/integrate.md §A`; areas claimed by others are read-only to you.
+- `STATE.md` and session numbers are branch-local. Tag journal lines with your owner id:
+  `S<n>/<owner> ...`. Maintenance runs on main only.
+- All merges, both directions, go through `workflows/integrate.md`. On main itself, commit only
+  board edits and integration merges — and never leave main red.
+
 ## Routing
 | Request looks like | Route |
 |---|---|
@@ -41,6 +49,7 @@ If the new Session number is a multiple of 10, add "maintenance due" to STATE `N
 | Restructure with zero behavior change | `.agent/workflows/refactor.md` |
 | Review a diff / PR | `.agent/workflows/review.md` |
 | Harness upkeep / maintenance due | `.agent/workflows/maintain.md` |
+| Team repo: start branch work, sync with main, or merge a branch | `.agent/workflows/integrate.md` |
 | Question or read-only analysis | Answer from MAP/PROJECT.md + targeted reads. Change nothing. Skip session END. |
 
 Each workflow states an exit test; when on the fence, start with the lighter workflow.

@@ -1,0 +1,8 @@
+# Merge rules for harness files in team mode (see .agent/workflows/integrate.md).
+# Drivers fire only when BOTH sides changed the file; one-sided changes merge normally.
+# `union` is built into git: keep both sides' lines (right for append-mostly files).
+# `ours` needs one-time activation per clone: `git config merge.ours.driver true`.
+.agent/STATE.md merge=ours
+.agent/BOARD.md merge=union
+.agent/DECISIONS.md merge=union
+.agent/journal/*.md merge=union
