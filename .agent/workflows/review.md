@@ -15,6 +15,7 @@ code. Output: verified findings, not rewrites (unless the user asks you to fix).
    `[blocker]` / `[should]` / `[nit]`.
 4. **Report** — per finding: `path:line`, what breaks, a concrete failing scenario, suggested
    direction (1 line). Blockers first. If clean: say clean, and list what you checked.
+   Findings the user defers (or can't act on now) → one ISSUES.md line each, so they survive.
 
 Done — tick in your final message:
 - [ ] Every changed file examined

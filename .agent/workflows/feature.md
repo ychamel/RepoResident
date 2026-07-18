@@ -7,9 +7,9 @@ Builder — write it so a session with zero other context could build from it (o
 
 ## 1 · Scope — you are the Architect
 1. Restate the goal in ≤3 lines, plus an explicit out-of-scope list.
-2. Read: STATE watch-outs · PROJECT.md · scan DECISIONS.md · MAP.md → area docs for the target
-   modules → targeted reads of files you'll touch. List those files with one-line roles
-   (this feeds the design's Current state section).
+2. Read: STATE watch-outs · PROJECT.md · scan DECISIONS.md + ISSUES.md Open (known issues in the
+   target area shape the design) · MAP.md → area docs for the target modules → targeted reads of
+   files you'll touch. List those files with one-line roles (feeds the design's Current state).
 3. GATE: request conflicts with a Decision or a PROJECT constraint? Surface it to the user now —
    never design around it silently.
 
@@ -45,7 +45,7 @@ Per slice, in order:
 (Better still: suggest the user run `workflows/review.md` in a fresh session that didn't write this code.)
 Read the complete diff and hunt: unhandled error paths · dead code / debug leftovers ·
 naming or pattern drift vs neighboring code · diff ≠ design (drift) · tests that could never fail.
-Fix findings now; out-of-scope ones become journal `flag:` lines.
+Fix findings now; genuinely out-of-scope ones become ISSUES.md lines.
 
 ## 6 · Record & close
 DECISIONS.md line per lasting choice · MAP.md if structure changed · area doc for a new gnarly
@@ -56,5 +56,5 @@ module (only if a future session would otherwise re-derive it) · design `Status
 - [ ] All design sections resolved; every edge-case row has evidence
 - [ ] Full tests/lint/build green; e2e exercised if runnable (output shown)
 - [ ] Diff free of TODOs, stubs, debug leftovers
-- [ ] Review pass done; residual findings journaled as flags
+- [ ] Review pass done; residual findings filed in ISSUES.md
 - [ ] MAP/DECISIONS/area docs current; journal appended; STATE rewritten

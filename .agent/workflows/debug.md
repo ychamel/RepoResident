@@ -6,8 +6,8 @@ Rules: never fix on hypothesis · reproduce before theorizing · change one vari
 every probe you add goes on a ledger and comes out at the end.
 
 1. **Reproduce** — a command/script/test that shows the failure deterministically (or a measured
-   flake rate). Can't reproduce? Gather evidence from logs/reports, write your repro attempts and
-   best hypothesis to the journal, report honestly — do not "fix" blind.
+   flake rate). Can't reproduce? Gather evidence from logs/reports, file an ISSUES.md line holding
+   your repro attempts + best hypothesis, report honestly — do not "fix" blind.
 2. **Hypothesize** — read the failing path (MAP → grep → targeted reads). List hypotheses ranked
    by likelihood, each with a discriminating check: "if H1, then X will show Y".
 3. **Discriminate** — run the checks: targeted logging, debugger, `git bisect`, input minimization.

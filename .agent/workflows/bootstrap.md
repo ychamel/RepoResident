@@ -21,7 +21,8 @@ verify gets marked `(unverified)` or `(?)` rather than stated confidently.
 3. MAP.md from the tree: one line per top-level module; mark `(?)` where you inferred without
    reading. Later sessions (or maintain.md) verify lazily.
 4. PROJECT.md: architecture from entry points + the imports of 3–5 key files only. Landmines:
-   whatever is already burning (failing tests, TODO bombs, deprecation warnings) — top 5 max.
+   gotchas that will bite future sessions — top 5 max. Already-burning work items (failing
+   tests, TODO bombs, deprecation warnings) → one ISSUES.md line each instead, top 5 by impact.
 5. STATE / journal / DECISIONS initialized as in A.6 (record notable pre-existing choices you
    could infer, marked as observed, not decided).
 

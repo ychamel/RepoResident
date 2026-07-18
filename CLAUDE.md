@@ -17,7 +17,8 @@ First session on this repo? `.agent/STATE.md` will route you to bootstrap.
 5. Code is truth; docs serve code. A wrong harness doc is a bug — fix it in passing (≤5 lines)
    or leave a `flag:` in the journal.
 6. Chat carries outcomes; files carry detail. Long analysis → `.agent/scratch/`,
-   designs → `.agent/designs/`, lasting choices → `.agent/DECISIONS.md`.
+   designs → `.agent/designs/`, lasting choices → `.agent/DECISIONS.md`,
+   deferred bugs/work → `.agent/ISSUES.md`.
 
 ## Session protocol
 START: read `.agent/STATE.md` → classify the request (routing below) → open that one workflow
@@ -41,6 +42,7 @@ If the new Session number is a multiple of 10, add "maintenance due" to STATE `N
 | Restructure with zero behavior change | `.agent/workflows/refactor.md` |
 | Review a diff / PR | `.agent/workflows/review.md` |
 | Harness upkeep / maintenance due | `.agent/workflows/maintain.md` |
+| Bug/task to record for later, not fix now | One line in `.agent/ISSUES.md` (format in its header). |
 | Question or read-only analysis | Answer from MAP/PROJECT.md + targeted reads. Change nothing. Skip session END. |
 
 Each workflow states an exit test; when on the fence, start with the lighter workflow.

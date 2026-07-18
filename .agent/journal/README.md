@@ -4,4 +4,5 @@
 
 Entry format (≤4 lines per session):
 S<n> <YYYY-MM-DD> <workflow>: outcome + key files touched [refs: <design>/D<n>]
-  flag: <debt, risk, or cleanup noticed but out of scope — optional; maintain.md triages these>
+  flag: <debt, risk, or cleanup noticed but out of scope — optional; maintain.md promotes these
+        to ISSUES.md or drops them>
