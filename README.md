@@ -149,7 +149,7 @@ AGENTS.md            # shim pointing non-Claude tools at CLAUDE.md
   PROJECT.md         # architecture, constraints, glossary, landmines
   DECISIONS.md       # binding choices, one line each + archive
   ISSUES.md          # backlog: bugs/debt/deferred work + closed history
-  workflows/         # feature · patch · debug · refactor · review · maintain · bootstrap
+  workflows/         # feature · patch · debug · refactor · review · maintain · bootstrap (+ integrate in team mode)
   designs/           # one design doc per feature (TEMPLATE.md) + archive/
   areas/             # deep docs for gnarly modules, created on demand
   journal/           # append-only session log, monthly files

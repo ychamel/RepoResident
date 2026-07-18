@@ -24,7 +24,8 @@ verify gets marked `(unverified)` or `(?)` rather than stated confidently.
    gotchas that will bite future sessions — top 5 max. Already-burning work items (failing
    tests, TODO bombs, deprecation warnings) → one ISSUES.md line each instead, top 5 by impact.
 5. STATE / journal / DECISIONS initialized as in A.6 (record notable pre-existing choices you
-   could infer, marked as observed, not decided).
+   could infer, marked as observed, not decided). Ensure the repo's .gitignore covers
+   `.agent/scratch/*` (keeping `.gitkeep`) — scratch notes must never be committed.
 
 Done — tick in your final message:
 - [ ] No `<fill>` placeholders remain anywhere
