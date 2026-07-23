@@ -1,66 +1,73 @@
-# The Harness — manual for humans
+# RepoResident harness manual
 
-A file-based operating system for AI agents working on this repo. Any session, on any model, in
-any tool that reads `CLAUDE.md`/`AGENTS.md` (Claude Code, Cursor, Codex, …) gets: current state,
-a procedure for its task type, and exactly as much project knowledge as that task needs.
+RepoResident is a file-based operating harness for coding agents working in this repository. It
+gives each session the current project state, a procedure for its task type, and only the project
+knowledge relevant to that work.
 
 ## Design principles
-1. **Context cost is O(task), not O(project age).** Hot state is size-capped and rewritten, not
-   appended. History (journal, closed issues, archived decisions, shipped designs) is append-only
-   cold storage: grepped when investigating, never loaded by default. A 2-year-old repo costs a
-   patch session the same tokens as a 2-week-old one.
-2. **Knowledge is layered; sessions descend only while needed.**
-   L0 `CLAUDE.md` (auto-loaded, ~85 lines) → L1 `STATE.md` (≤40) → L2 one workflow file (~40–60)
-   → L3 MAP / PROJECT / area docs / active design (on demand) → L4 code (targeted reads only).
-   Fixed overhead per session ≈ 2k tokens; everything beyond that is pulled by the task.
-3. **Weak-model-proof.** Numbered steps, explicit gates and exit tests, fill-in templates,
-   hard caps, verbatim checklists, and anti-guessing rules ("never call an API you haven't seen
-   defined"). Procedure carries the intelligence so judgment is only needed where it's genuine.
-4. **Completeness is contractual.** The design template's edge-case table must be filled and each
-   row later ticked with evidence. Shortcuts (stubs, "for now", silently narrowed scope) are
-   banned by the prime directives, and the Reviewer phase hunts for them.
-5. **Self-maintaining.** Every harness file declares its own line cap; `workflows/maintain.md`
-   runs every ~10 sessions to compact, verify docs against code, and triage accumulated flags
-   into the issue backlog.
 
-## Personas = rule envelopes, not roleplay
-- **Architect** — scopes and designs; forbidden to write code. Output: a design doc.
-- **Builder** — implements the design slice by slice; forbidden to redesign.
-- **Fixer** — minimal-diff patches; forbidden to refactor in passing (files a `flag:` instead).
-- **Reviewer** — hostile fresh eyes on a diff; findings, not rewrites.
-- **Curator** — maintains the harness itself (maintain.md).
+1. **Context cost follows the task, not project age.** Hot state is capped and rewritten. Historical
+   journals, closed issues, archived decisions, and shipped designs remain searchable without being
+   loaded by default.
+2. **Knowledge is layered.** Sessions load the operating manual, current state, one workflow, and
+   then only the project files required for the task.
+3. **Procedure carries working discipline.** Numbered steps, approval gates, templates, hard limits,
+   and exit checks reduce ambiguity for every model tier.
+4. **Completeness is explicit.** Feature designs account for empty input, invalid input, boundaries,
+   concurrency, dependency failures, and partial failure. Builders attach verification evidence.
+5. **The harness is maintained like code.** A maintenance workflow checks size budgets, verifies
+   documentation against the repository, and promotes useful observations into tracked issues.
 
-Every handover between personas is an **artifact** (design doc → Builder, diff → Reviewer,
-STATE.md → next session). That means phases can run as separate sessions — and reviews are
-genuinely better run in a fresh session that didn't write the code. Between sessions, the
-handover is the STATE.md rewrite: what's active, exact next step, watch-outs.
+## Working roles
 
-## Using it
-- **New project:** copy this template, open a session: `Bootstrap this: <one-paragraph brief>`.
-- **Existing repo:** copy `CLAUDE.md`, `AGENTS.md`, `.agent/` in, then: `Bootstrap: adopt this repo.`
-- **Daily:** just ask for things; the routing table dispatches. Small asks stay cheap (a patch
-  reads ~5 files); big asks produce a design before code. "File an issue: …" banks work for
-  later in `ISSUES.md`; "what's open?" reads the backlog back.
-- **Model mixing:** put the strongest model on designs and reviews; build slices, patches, and
-  maintenance run fine on cheaper models — the design doc plus checklists carry the intent.
-- **Multi-session features:** the design's work plan is sliced to ≤1 session each; STATE points
-  at the next slice, so any session can resume without replaying history.
-- **Parallel sessions:** the harness assumes one writer at a time. If you must parallelize,
-  split by area and let only one session own STATE.md.
-- **Trust the budgets.** If a harness file feels bloated or stale, say "run maintenance".
+The roles define rules for each phase. They are not conversational personas.
+
+- **Architect:** scopes and designs without writing implementation code.
+- **Builder:** implements an approved design without changing its structure silently.
+- **Fixer:** makes the smallest complete correction and avoids unrelated refactoring.
+- **Reviewer:** reports verified findings and does not rewrite unless asked.
+- **Curator:** maintains the harness and its bounded knowledge files.
+
+Each handoff produces an artifact. Designs guide builders, diffs guide reviewers, and `STATE.md`
+guides the next session.
+
+## Using RepoResident
+
+- **New project:** create a repository from the template and provide a project brief.
+- **Existing project:** copy `CLAUDE.md`, `AGENTS.md`, and `.agent/`, then ask the agent to adopt it.
+- **Daily work:** ask normally. The routing table in `CLAUDE.md` selects the workflow.
+- **Long features:** work plans are split into session-sized slices that each leave the project
+  verifiable.
+- **Parallel work:** the default harness assumes one writer. Use the optional team-mode branch when
+  several branches need shared state and integration rules.
+- **Maintenance:** run the maintenance workflow when state requests it or a file exceeds its limit.
 
 ## File map
+
 | File | Role | Loaded |
 |---|---|---|
-| `CLAUDE.md` | L0: directives, protocol, routing, project facts | every session (auto) |
-| `AGENTS.md` | shim pointing non-Claude tools at CLAUDE.md | by other tools |
-| `.agent/STATE.md` | hot state + inter-session handover | every session |
-| `.agent/MAP.md` | one line per module — where things live | when locating code |
-| `.agent/PROJECT.md` | architecture, constraints, glossary, landmines | feature work / confusion |
-| `.agent/DECISIONS.md` | binding one-line decisions + archive | before designing |
-| `.agent/ISSUES.md` | tracked backlog: bugs, debt, deferred work + closed history | picking work; scanned before designing |
-| `.agent/workflows/*.md` | procedures: feature, patch, debug, refactor, review, maintain, bootstrap | one per task |
-| `.agent/designs/` | one doc per feature (TEMPLATE.md); archive/ for shipped | active design only |
-| `.agent/areas/` | deep docs for gnarly modules, created on demand | when working that area |
-| `.agent/journal/` | append-only session log, monthly files | write-only; grep to investigate |
-| `.agent/scratch/` | session working notes, gitignored | never by default |
+| `CLAUDE.md` | Operating rules, protocol, routing, and project facts | Every session |
+| `AGENTS.md` | Entry point for tools using the `AGENTS.md` convention | Tool dependent |
+| `.agent/STATE.md` | Current project state and inter-session handoff | Every session |
+| `.agent/MAP.md` | Compact module and directory map | When locating code |
+| `.agent/PROJECT.md` | Architecture, constraints, glossary, and project-wide risks | Feature work or confusion |
+| `.agent/DECISIONS.md` | Binding technical choices with reasons | Before design work |
+| `.agent/ISSUES.md` | Bounded backlog for bugs, debt, and deferred work | Before design or work selection |
+| `.agent/workflows/*.md` | Procedures for task categories | One per task |
+| `.agent/designs/` | Active and archived feature designs | Active design only |
+| `.agent/areas/` | Optional deep documentation for complex modules | When working in that area |
+| `.agent/journal/` | Append-only session outcomes | Written at session close |
+| `.agent/scratch/` | Ignored temporary investigation notes | Only while active |
+
+## Context layers
+
+| Layer | Content |
+|---|---|
+| L0 | `CLAUDE.md`, the operating manual |
+| L1 | `STATE.md`, the current project state |
+| L2 | One workflow for the current request |
+| L3 | Map, project facts, decisions, issues, area docs, and active design |
+| L4 | Targeted source code |
+
+The limits are intentional. Keep durable knowledge concise, move history to the journal, and trust
+the routing process instead of loading every available file.
