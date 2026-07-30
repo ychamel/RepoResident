@@ -36,6 +36,7 @@ If the new Session number is a multiple of 10, add "maintenance due" to STATE `N
 ## Routing
 | Request looks like | Route |
 |---|---|
+| Whole project from one brief; no product code yet | `.agent/workflows/oneshot.md` |
 | New capability; or touches >2 files, or any interface/schema/dependency | `.agent/workflows/feature.md` |
 | Small fix or tweak, cause known | `.agent/workflows/patch.md` |
 | Defect, cause unknown | `.agent/workflows/debug.md` |

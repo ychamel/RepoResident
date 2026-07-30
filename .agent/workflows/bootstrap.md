@@ -1,5 +1,7 @@
 # Workflow: Bootstrap — first session on a new or adopted project
 Use when: CLAUDE.md "Project facts" still has `<fill>` placeholders, or STATE.md Session is 0.
+Prompt also contains a full product brief to build now? Route to workflows/oneshot.md instead
+(it runs §A steps 2–5 mid-flight).
 Wrong facts written here poison every future session — verify, don't guess. Anything you can't
 verify gets marked `(unverified)` or `(?)` rather than stated confidently.
 
