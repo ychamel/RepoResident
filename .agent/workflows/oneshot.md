@@ -33,6 +33,9 @@ a DECISIONS.md line tagged `(assumed)`, proceed. That ledger is how the run is a
 Per slice, run feature.md §3 exactly. At each slice's green checkpoint: tick the slice in the
 work plan → STATE `Active: oneshot 001 slice <k>/<N>` → commit `S1 genesis slice <k>: <summary>`.
 The commit is the resume anchor — never batch several slices into one commit.
+Subagents available → delegate each slice (CLAUDE.md § Delegation): brief = design path + slice
+row; it builds and tests, you rerun the suite, tick, commit. Your context then carries the plan
+and verification, not implementation detail — that is how one shot survives a large brief.
 
 ## 4 · Verify against the brief, not the design — Reviewer
 1. Run feature.md §4 (full suite, edge-table walk, end-to-end as a user) and §5 (hostile review).

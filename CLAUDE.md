@@ -48,6 +48,17 @@ If the new Session number is a multiple of 10, add "maintenance due" to STATE `N
 
 Each workflow states an exit test; when on the fence, start with the lighter workflow.
 
+## Delegation  <!-- only if your tool can spawn subagents; otherwise ignore this section -->
+Subagents keep this context small on large tasks. Delegate only work whose spec already lives in
+files: read-only exploration (returns conclusions, never file contents), `review.md` on a diff
+this session wrote, or one work-plan slice of an approved design.
+- Briefs are self-contained: goal, exact files/design sections to read, what to return. A
+  subagent inherits no chat context — if it would need to ask questions, don't delegate yet.
+- Subagents never touch harness state (STATE/journal/DECISIONS/ISSUES/MAP, session END); they
+  change only code, tests, and scratch, then report. You verify (run the tests yourself) and
+  you record — a subagent's "done" is a claim, not evidence.
+- Sequential, one at a time: the harness assumes a single writer.
+
 ## Output contract
 - Lead with the outcome. Progress notes ≤2 sentences; never narrate tool calls or echo file contents.
 - ≤10 lines of code in chat unless asked; reference `path:line` instead.

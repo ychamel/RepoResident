@@ -10,6 +10,8 @@ Builder — write it so a session with zero other context could build from it (o
 2. Read: STATE watch-outs · PROJECT.md · scan DECISIONS.md + ISSUES.md Open (known issues in the
    target area shape the design) · MAP.md → area docs for the target modules → targeted reads of
    files you'll touch. List those files with one-line roles (feeds the design's Current state).
+   Exploration wider than ~3 reads → delegate it to a read-only subagent (CLAUDE.md § Delegation):
+   it returns the file list, roles, and flow summary; you read only what you'll change.
 3. GATE: request conflicts with a Decision or a PROJECT constraint? Surface it to the user now —
    never design around it silently.
 
@@ -42,7 +44,8 @@ Per slice, in order:
 3. If the feature is runnable, exercise it end-to-end once as a user would; record what you observed.
 
 ## 5 · Review — you are now the Reviewer: hostile fresh eyes
-(Better still: suggest the user run `workflows/review.md` in a fresh session that didn't write this code.)
+(Best: have a subagent run `workflows/review.md` on the diff — clean context that didn't write it
+(CLAUDE.md § Delegation). No subagents → suggest the user run it in a fresh session.)
 Read the complete diff and hunt: unhandled error paths · dead code / debug leftovers ·
 naming or pattern drift vs neighboring code · diff ≠ design (drift) · tests that could never fail.
 Fix findings now; genuinely out-of-scope ones become ISSUES.md lines.
